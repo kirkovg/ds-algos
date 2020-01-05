@@ -1,17 +1,3 @@
-/*let customList = {
-  head: {
-    value: 10,
-    next: {
-      value: 5,
-      next: {
-        value: 16,
-        next: null
-      }
-    }
-  }
-};*/
-
-
 class SingleLinkedList {
   constructor(value) {
     this.head = {
@@ -77,11 +63,28 @@ class SingleLinkedList {
     return currentNode;
   }
 
+  reverse() {
+    if (this.length === 1) {
+      return this.head;
+    }
+    let first = this.head;
+    this.tail = this.head;
+    let second = first.next;
+    while (second) {
+      const temp = second.next;
+      second.next = first;
+      first = second;
+      second = temp;
+    }
+    this.head.next = null;
+    this.head = first;
+  }
+
   print() {
     let temp = this.head;
     const values = [];
     while (temp !== null) {
-      values.push(temp.value);
+      values.push('[' + temp.value + ']');
       temp = temp.next;
     }
     console.log(values.join('-->'));
@@ -94,4 +97,5 @@ myLinkedList.append(16);
 myLinkedList.prepend(1);
 myLinkedList.insert(2, 99);
 myLinkedList.remove(4);
+myLinkedList.reverse();
 myLinkedList.print();
